@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include <algorithm>
 typedef long long ll;
 #define speedy iostream::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 #define file ::freopen("#######.in","r",stdin);
@@ -13,14 +14,25 @@ template <typename T>
 class arr_Based_Stack {
 
 private:
+    int capacity{0};
     int size {0};
     int topElement {};
     T* arr {nullptr};
-
+    void expand_capacity() {
+        // Double the actual array size
+        capacity *= 2;
+        cout << "Expand capacity to "
+             << capacity << "\n";
+        T *arr2 = new T[capacity] { };
+        for (int i = 0; i < size; ++i)
+            arr2[i] = arr[i];	// copy data
+        swap(arr, arr2);
+        delete[] arr2;
+    }
 public:
 
-    arr_Based_Stack(int size) : size(size), topElement(-1) {
-        arr = new T[size];
+    arr_Based_Stack(int capacity) : capacity(capacity), topElement(-1) {
+        arr = new T[capacity];
     }
 
     ~arr_Based_Stack() {
@@ -29,13 +41,10 @@ public:
     }
 
     void push(T element) {
-        assert(!isFull());
-        arr[++topElement] = element
-                ;
-    }
-
-    int isFull() {
-        return topElement == size - 1;
+        if (size == capacity)
+        {expand_capacity();}
+        arr[++topElement] = element;
+        size++;
     }
 
     bool isEmpty() {
@@ -55,6 +64,7 @@ public:
 
     T pop() {
         assert(!isEmpty());
+        size--;
         return arr[topElement--];
     }
 
@@ -79,10 +89,10 @@ int main() {
 
     st.print();
 
-    cout<<st.stackSize()<<"\n"<<st.isFull()<<"\n"<<st.isEmpty()<<"\n"<<st.top()<<"\n";
+    cout<<st.stackSize()<<"\n"<<st.isEmpty()<<"\n"<<st.top()<<"\n";
     cout<<"Top Element Removed: "<<st.pop()<<"\n";
     st.print();
-    cout<<st.stackSize()<<"\n"<<st.isFull()<<"\n"<<st.isEmpty()<<"\n"<<st.top()<<"\n";
+    cout<<st.stackSize()<<"\n"<<st.isEmpty()<<"\n"<<st.top()<<"\n";
 
     cout<<"\n===========================================================\n\n";
 
@@ -91,7 +101,7 @@ int main() {
     stk.push('C');
     stk.push('D');
     stk.push('E');
-
+    stk.push('F');
     stk.print();
 
     cout<<stk.stackSize()<<"\n"<<stk.isEmpty()<<"\n"<<stk.top()<<"\n";

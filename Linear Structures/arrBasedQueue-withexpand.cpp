@@ -13,13 +13,24 @@ class arr_Based_Queue {
 
 private:
     int capacity {0};
-    int lastElement {};
-    T* arr {nullptr};
-    int constlastElement {0};
     int size{0};
+    T* arr {nullptr};
+    void expand_capacity() {
+        // Double the actual array size
+        capacity *= 2;
+        cout << "Expand capacity to "
+             << capacity << "\n";
+        T *arr2 = new T[capacity] { };
+        for (int i = 0; i < size; ++i)
+            arr2[i] = arr[i];	// copy data
+
+        swap(arr, arr2);
+        delete[] arr2;
+    }
+
 public:
 
-    arr_Based_Queue(int capacity) : capacity(capacity), lastElement(capacity-1) ,constlastElement(capacity-1) {
+    arr_Based_Queue(int capacity) : capacity(capacity) {
         arr = new T[capacity];
     }
 
@@ -29,21 +40,18 @@ public:
     }
 
     void push(T element) {
-        assert(!isFull());
-        arr[lastElement--] = element;
-        size++;
+        if (size == capacity)
+        {expand_capacity();}
+        arr[size++] = element;
     }
 
-    int isFull() {
-        return size == capacity;
-    }
 
     bool isEmpty() {
-        return lastElement == capacity - 1;
+        return size == 0;
     }
 
     void print() {
-        for (int i = constlastElement; i > lastElement; i--){
+        for (int i =0 ; i <size ; i++){
             cout << arr[i] << " ";}
         cout << "\n";
     }
@@ -56,13 +64,16 @@ public:
 
     T dequeue() {
         assert(!isEmpty());
+        T firstElement = arr[0];
+        for (int i = 0; i < size - 1; ++i){
+            arr[i] = arr[i + 1];}
         size--;
-        return arr[constlastElement--];
+        return firstElement;
     }
 
     T first() {
         assert(!isEmpty());
-        return arr[constlastElement];
+        return arr[0];
     }
 
     int queueSize(){
@@ -82,10 +93,10 @@ int main() {
 
     queue1.print();
 
-    cout<<queue1.queueSize()<<"\n"<<queue1.isFull()<<"\n"<<queue1.isEmpty()<<"\n"<<queue1.first()<<"\n";
+    cout<<queue1.queueSize()<<"\n"<<queue1.isEmpty()<<"\n"<<queue1.first()<<"\n";
     cout<<"first Element Removed: "<<queue1.dequeue()<<"\n";
     queue1.print();
-    cout<<queue1.queueSize()<<"\n"<<queue1.isFull()<<"\n"<<queue1.isEmpty()<<"\n"<<queue1.first()<<"\n";
+    cout<<queue1.queueSize()<<"\n"<<queue1.isEmpty()<<"\n"<<queue1.first()<<"\n";
 
     cout<<"\n===========================================================\n\n";
 
@@ -97,13 +108,16 @@ int main() {
 
     queue2.print();
 
-    cout<<queue2.queueSize()<<"\n"<<queue2.isFull()<<"\n"<<queue2.isEmpty()<<"\n"<<queue2.first()<<"\n";
+    cout<<queue2.queueSize()<<"\n"<<queue2.isEmpty()<<"\n"<<queue2.first()<<"\n";
     cout<<"first Element Removed: "<<queue2.dequeue()<<"\n";
     queue2.print();
-    cout<<queue2.queueSize()<<"\n"<<queue2.isFull()<<"\n"<<queue2.isEmpty()<<"\n"<<queue2.first()<<"\n";
+    cout<<queue2.queueSize()<<"\n"<<queue2.isEmpty()<<"\n"<<queue2.first()<<"\n";
 
     cout<<"\n===========================================================\n\n";
 
+    queue3.push('A');
+    queue3.push('B');
+    queue3.push('C');
     queue3.push('A');
     queue3.push('B');
     queue3.push('C');
@@ -111,10 +125,10 @@ int main() {
 
     queue3.print();
 
-    cout<<queue3.queueSize()<<"\n"<<queue3.isFull()<<"\n"<<queue3.isEmpty()<<"\n"<<queue3.first()<<"\n";
+    cout<<queue3.queueSize()<<"\n"<<queue3.isEmpty()<<"\n"<<queue3.first()<<"\n";
     cout<<"first Element Removed: "<<queue3.dequeue()<<"\n";
     queue3.print();
-    cout<<queue3.queueSize()<<"\n"<<queue3.isFull()<<"\n"<<queue3.isEmpty()<<"\n"<<queue3.first()<<"\n";
+    cout<<queue3.queueSize()<<"\n"<<queue3.isEmpty()<<"\n"<<queue3.first()<<"\n";
 
     cout<<"\n===========================NoRTE===========================\n";
 
