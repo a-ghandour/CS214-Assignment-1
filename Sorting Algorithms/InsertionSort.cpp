@@ -1,5 +1,6 @@
-template<typename T>
-void insertionSort(vector<T>& data){
+#include <bits/stdc++.h>
+using namespace std;
+template<typename T> void insertionSort(vector<T>& data){
     int comparisons = data.size();
     for (int i = 1; i < comparisons; ++i) {
         T key = data[i];

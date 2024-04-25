@@ -1,5 +1,6 @@
-template<typename T>
-void selectionSort(vector<T>& data) {
+#include <bits/stdc++.h>
+using namespace std;
+template<typename T> void selectionSort(vector<T>& data) {
     int comparisons = data.size();
     for (int i = 0; i < comparisons - 1; i++) {
         int Minimum = i;
