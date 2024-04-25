@@ -13,8 +13,10 @@ private:
     string name;
     double gpa;
 public:
-    Student(string sid, string sname, double sgpa);
+    Student();
+    Student(string sname, string sid , double sgpa);
     bool operator< (Student std);
+    friend ostream& operator<<(ostream& out, const Student& std);
 };
 
 
