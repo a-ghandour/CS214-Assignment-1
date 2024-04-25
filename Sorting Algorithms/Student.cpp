@@ -15,9 +15,15 @@ Student::Student(string sname, string sid, double sgpa) {
 Student::Student() = default;
 
 bool Student::operator<(Student std) {
-    if(std.name < this->name){
+    if(std.name < this->name)
         return true;
-    }
+    else
+        return false;
+}
+
+bool Student::operator>(Student std) {
+    if(std.name > this->name)
+        return true;
     else
         return false;
 }

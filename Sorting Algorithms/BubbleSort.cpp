@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
+#include "Student.h"
 using namespace std;
-template<typename T> void BubbleSort(vector<T>& data) {
+void BubbleSort(vector<Student>& data) {
     int comparisons = data.size();
     for (int i = 0; i < comparisons - 1; i++) {
         for (int j = 0; j < comparisons - i - 1; j++) {

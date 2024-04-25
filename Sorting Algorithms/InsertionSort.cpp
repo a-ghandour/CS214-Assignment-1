@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
+#include "Student.h"
 using namespace std;
-template<typename T> void insertionSort(vector<T>& data){
+void insertionSort(vector<Student>& data){
     int comparisons = data.size();
     for (int i = 1; i < comparisons; ++i) {
         T key = data[i];
