@@ -9,11 +9,11 @@ int partition(vector<Student>& std, int l, int r){
         do{
             i++;
         }
-        while(std[i] <= piv);
+        while(std[i] >= piv and i<r);
         do {
             j--;
         }
-        while(std[j] > piv);
+        while(std[j] < piv and j>l);
         if(i < j)
             swap(std[i], std[j]);
     }
@@ -24,16 +24,15 @@ int partition(vector<Student>& std, int l, int r){
 int partition_gpa(vector<Student>& std, int l, int r){
     auto piv = std[l];
     int i=l, j=r;
-    double gpa = piv.get_gpa();
     while(i < j){
         do{
             i++;
         }
-        while(std[i].get_gpa() <= gpa);
+        while(std[i].get_gpa() >= piv.get_gpa() and i < r);
         do {
             j--;
         }
-        while(std[j].get_gpa() > gpa);
+        while(std[j].get_gpa() < piv.get_gpa() and j > l);
         if (i < j)
             swap(std[i], std[j]);
     }

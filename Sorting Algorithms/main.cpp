@@ -16,22 +16,22 @@ int main (){
         return 0;
     }
     string line;
-    getline(input, line);
-    int n = stoi(line);
+    int n;
+    input>>n;
     vector<Student>std_arr;
     for(int i=0; i<n; i++){
+        input.ignore();
         getline(input, line);
         string sname = line;
-        getline(input, line);
-        string sid = line;
-        getline(input, line);
-        double sgpa = stod(line);
+        string sid;
+        double sgpa;
+        input>>sid>>sgpa;
         Student std(sname, sid, sgpa);
         std_arr.push_back(std);
     }
     input.close();
-//    mergeSort(std_arr, 0, n-1, "name");
-    ofstream output("../Sorting Algorithms/studentssorted.txt");
+    mergeSort(std_arr, 0, n-1, "gpa");
+    ofstream output("../Sorting Algorithms/studentssssorted.txt");
     for(const auto& i : std_arr){
         output<<i;
     }

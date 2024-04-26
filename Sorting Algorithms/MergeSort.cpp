@@ -11,7 +11,7 @@ void merge(vector<Student>& stds, int l, int mid, int r){
     int i=0, j=0, k=l;
 
     while(i<n and j<m){
-        if(onesub[i] < twosub[0])
+        if(onesub[i] >= twosub[0])
             stds[k++] = onesub[i++];
         else
             stds[k++] = twosub[j++];
@@ -32,7 +32,7 @@ void merge_gpa(vector<Student>& stds, int l, int mid, int r){
     int i=0, j=0, k=l;
 
     while(i<n and j<m){
-        if(onesub[i].get_gpa() < twosub[0].get_gpa())
+        if(onesub[i].get_gpa() >= twosub[0].get_gpa())
             stds[k++] = onesub[i++];
         else
             stds[k++] = twosub[j++];

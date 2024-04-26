@@ -9,21 +9,25 @@ using namespace std;
 Student::Student(string sname, string sid, double sgpa) {
         id = sid;
         name = sname;
-        sgpa = gpa;
+        gpa = sgpa;
 }
 
 Student::Student() = default;
 
-bool Student::operator<(Student std) {
-    return this->name < std.name;
+bool Student::operator<(Student& std) {
+    return std.name  < this->name;
 }
 
-bool Student::operator>(Student std) {
-    return this->name > std.name;
+bool Student::operator>(Student& std) {
+    return std.name > this->name;
 }
 
-bool Student::operator<=(Student std) {
-    return this->name <= std.name;
+bool Student::operator<=(Student& std) {
+    return std.name <= this->name;
+}
+
+bool Student::operator>=(Student& std) {
+    return std.name >= this->name;
 }
 
 double Student::get_gpa() {
@@ -31,6 +35,6 @@ double Student::get_gpa() {
 }
 
 ostream& operator<<(ostream& out, const Student& std){
-    out<<std.name<<'\n'<<std.id<<'\n'<<setprecision(3)<<std.gpa<<'\n';
+    out<<std.name<<'\n'<<std.id<<'\n'<<std.gpa<<'\n';
     return out;
 }
