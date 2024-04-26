@@ -1,49 +1,62 @@
 #include <bits/stdc++.h>
 using namespace std;
-template<typename T> void merge(vector<T>& stds, int l, int mid, int r){
+template<typename T> void merge(vector<T>& stds, int l, int mid, int r, long long& compCount){
     int n = mid - l + 1, m = r-mid;
-    T onesub[n], twosub[m];
-    for(int i=0; i<n; i++)
-        onesub[i] = stds[i+ l];
-    for(int i=0; i<m; i++)
-        twosub[i] = stds[i + mid+1];
+    T subone[n], subtwo[m];
+    for(int i=0; i<n; i++, compCount++)
+        subone[i] = stds[i+ l];
+    compCount++;
+    for(int i=0; i<m; i++, compCount++)
+        subtwo[i] = stds[i + mid+1];
+    compCount++;
     int i=0, j=0, k=l;
 
     while(i<n and j<m){
-        if(onesub[i] < twosub[j])
-            stds[k++] = onesub[i++];
+        if(subone[i] < subtwo[j])
+            stds[k++] = subone[i++];
         else
-            stds[k++] = twosub[j++];
+            stds[k++] = subtwo[j++];
+        compCount++;
+        compCount++;
     }
-    for(; i<n; i++)
-        stds[k++] = onesub[i];
-    for(; j<m; j++)
-        stds[k++] = twosub[j];
+    for(; i<n; i++, compCount++)
+        stds[k++] = subone[i];
+    compCount++;
+    for(; j<m; j++, compCount++)
+        stds[k++] = subtwo[j];
+    compCount++;
 }
 
-template<typename T> void merge_gpa(vector<T>& stds, int l, int mid, int r){
+template<typename T> void merge_gpa(vector<T>& stds, int l, int mid, int r, long long& compCount){
     int n = mid - l + 1, m = r-mid;
-    T onesub[n], twosub[m];
-    for(int i=0; i<n; i++)
-        onesub[i] = stds[i+ l];
-    for(int i=0; i<m; i++)
-        twosub[i] = stds[i + mid+1];
+    T subone[n], subtwo[m];
+    for(int i=0; i<n; i++, compCount++)
+        subone[i] = stds[i+ l];
+    compCount++;
+    for(int i=0; i<m; i++, compCount++)
+        subtwo[i] = stds[i + mid+1];
+    compCount++;
     int i=0, j=0, k=l;
 
     while(i<n and j<m){
-        if(onesub[i].get_gpa() >= twosub[j].get_gpa())
-            stds[k++] = onesub[i++];
+        if(subone[i].get_gpa() >= subtwo[j].get_gpa())
+            stds[k++] = subone[i++];
         else
-            stds[k++] = twosub[j++];
+            stds[k++] = subtwo[j++];
+        compCount++;
+        compCount++;
     }
-    for(; i<n; i++)
-        stds[k++] = onesub[i];
-    for(; j<m; j++)
-        stds[k++] = twosub[j];
+    compCount++;
+    for(; i<n; i++, compCount++)
+        stds[k++] = subone[i];
+    compCount++;
+    for(; j<m; j++, compCount++)
+        stds[k++] = subtwo[j];
+    compCount++;
 }
 
 
-template<typename T> void mergeSort(vector<T>& stds, int l, int r, string type){
+template<typename T> void mergeSort(vector<T>& stds, int l, int r, string type, long long& compCount){
     if(l < r){
         int mid = (l+r)/2;
         mergeSort(stds, mid+1, r, type);
@@ -53,5 +66,7 @@ template<typename T> void mergeSort(vector<T>& stds, int l, int r, string type){
             merge(stds, l, mid, r);
         else
             merge_gpa(stds, l, mid, r);
+        compCount++;
     }
+    compCount++;
 }
