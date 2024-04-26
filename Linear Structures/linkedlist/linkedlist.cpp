@@ -184,33 +184,40 @@ bool linkedlist<t>::isItemAtEqual (t element, int index) {
 //======================================================================
 template <typename t>
 void linkedlist<t>::swap (int index1, int index2){
+    int size = linkedListSize();
+    if (size == 0 || index1 < 0 || index2 < 0 || index1 >= size || index2 >= size) {
+        cout << "Invalid indices or empty list." << endl;
+        return;
+    }
+    if (index1 == index2) {
+        return;
+    }
     if (index1 > index2)
-        swap(index1,index2);
-    int num = 0; //++ to eqaul index
-    Node<t> *temp1 = head;
-    Node<t> *temp2 = head;
-    int cnt = linkedListSize();
-    if (cnt < index2){
-        cout<<"index2 bigger than linkedlist lenth";
-        return ;
+        swap(index2, index1);
+
+    Node<t> *prev1 = nullptr, *prev2 = nullptr;
+    Node<t> *curr1 = head, *curr2 = head;
+    for (int i = 0; i < index1; i++) {
+        prev1 = curr1;
+        curr1 = curr1->next;
     }
-    while (num != index1-1){
-        num++;
-        temp1 = temp1->next;
-        temp2 = temp2->next;
+    for (int i = 0; i < index2; i++) {
+        prev2 = curr2;
+        curr2 = curr2->next;
     }
-    while (num != index2-1){
-        num++;
-        temp2 = temp2->next;
-    }
-    temp1->next = temp2->next;
-    //shift
-    temp1 = temp1->next;
-    temp2 = temp2->next;
-    //swap
-    Node<t> *temp1_next = temp1->next;
-    temp1->next = temp2->next;
-    temp2->next = temp1_next;
+    if (prev1)
+        prev1->next = curr2;
+    else
+        head = curr2;
+
+    if (prev2)
+        prev2->next = curr1;
+    else
+        head = curr1;
+
+    Node<t> *temp = curr1->next;
+    curr1->next = curr2->next;
+    curr2->next = temp;
 }
 //======================================================================
 template <typename t>
