@@ -17,7 +17,9 @@ public:
     Student(string sname, string sid , double sgpa);
     bool operator< (Student std);
     bool operator> (Student std);
+    bool operator<= (Student std);
     friend ostream& operator<<(ostream& out, const Student& std);
+    double get_gpa();
 };
 
 

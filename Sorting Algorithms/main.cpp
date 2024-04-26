@@ -1,8 +1,10 @@
 #include<bits/stdc++.h>
-#include "BubbleSort.cpp"
-#include "InsertionSort.cpp"
+//#include "BubbleSort.cpp"
+//#include "InsertionSort.cpp"
 #include "SelectionSort.cpp"
-#include "ShellSort.cpp"
+//#include "ShellSort.cpp"
+#include "MergeSort.cpp"
+#include "QuickSort.cpp"
 #include "Student.h"
 #include "Student.cpp"
 using namespace std;
@@ -28,9 +30,11 @@ int main (){
         std_arr.push_back(std);
     }
     input.close();
+//    mergeSort(std_arr, 0, n-1, "name");
     ofstream output("../Sorting Algorithms/studentssorted.txt");
-    for(auto i : std_arr){
+    for(const auto& i : std_arr){
         output<<i;
     }
+
     output.close();
 }
