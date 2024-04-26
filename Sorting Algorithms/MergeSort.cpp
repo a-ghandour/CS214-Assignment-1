@@ -56,16 +56,16 @@ template<typename T> void merge_gpa(vector<T>& stds, int l, int mid, int r, long
 }
 
 
-template<typename T> void mergeSort(vector<T>& stds, int l, int r, string type, long long& compCount){
+template<typename T> void mergeSort(vector<T> &stds, int l, int r, string type, long long&compCount) {
     if(l < r){
         int mid = (l+r)/2;
-        mergeSort(stds, mid+1, r, type);
-        mergeSort(stds, l, mid, type);
+        mergeSort(stds, mid + 1, r, type, compCount);
+        mergeSort(stds, l, mid, type, compCount);
         transform(type.begin(), type.end(), type.begin(), ::tolower);
         if(type == "name")
-            merge(stds, l, mid, r);
+            merge(stds, l, mid, r, compCount);
         else
-            merge_gpa(stds, l, mid, r);
+            merge_gpa(stds, l, mid, r, compCount);
         compCount++;
     }
     compCount++;
