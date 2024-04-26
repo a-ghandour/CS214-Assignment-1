@@ -15,19 +15,19 @@ Student::Student(string sname, string sid, double sgpa) {
 Student::Student() = default;
 
 bool Student::operator<(Student& std) {
-    return std.name  < this->name;
+    return this->name  < std.name;
 }
 
 bool Student::operator>(Student& std) {
-    return std.name > this->name;
+    return this->name > std.name;
 }
 
 bool Student::operator<=(Student& std) {
-    return std.name <= this->name;
+    return this->name <= std.name;
 }
 
 bool Student::operator>=(Student& std) {
-    return std.name >= this->name;
+    return this->name >= std.name;
 }
 
 double Student::get_gpa() {

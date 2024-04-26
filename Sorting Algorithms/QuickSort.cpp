@@ -1,19 +1,18 @@
 #include <bits/stdc++.h>
-#include "Student.h"
 using namespace std;
 
-int partition(vector<Student>& std, int l, int r){
+template<typename T> int partition(vector<T>& std, int l, int r){
     auto piv = std[l];
     int i=l, j=r;
     while(i < j){
         do{
             i++;
         }
-        while(std[i] >= piv and i<r);
+        while(std[i] <= piv and i<r);
         do {
             j--;
         }
-        while(std[j] < piv and j>l);
+        while(std[j] > piv and j>l);
         if(i < j)
             swap(std[i], std[j]);
     }
@@ -21,7 +20,7 @@ int partition(vector<Student>& std, int l, int r){
     return j;
 }
 
-int partition_gpa(vector<Student>& std, int l, int r){
+template<typename T> int partition_gpa(vector<T>& std, int l, int r){
     auto piv = std[l];
     int i=l, j=r;
     while(i < j){
@@ -40,7 +39,7 @@ int partition_gpa(vector<Student>& std, int l, int r){
     return j;
 }
 
-void quickSort(vector<Student>& std, int l, int r, string type){
+template<typename T> void quickSort(vector<T>& std, int l, int r, string type){
     if(l >= r)
         return;
     int piv;

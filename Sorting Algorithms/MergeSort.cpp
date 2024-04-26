@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
-#include "Student.h"
 using namespace std;
-void merge(vector<Student>& stds, int l, int mid, int r){
+template<typename T> void merge(vector<T>& stds, int l, int mid, int r){
     int n = mid - l + 1, m = r-mid;
-    Student onesub[n], twosub[m];
+    T onesub[n], twosub[m];
     for(int i=0; i<n; i++)
         onesub[i] = stds[i+ l];
     for(int i=0; i<m; i++)
@@ -11,7 +10,7 @@ void merge(vector<Student>& stds, int l, int mid, int r){
     int i=0, j=0, k=l;
 
     while(i<n and j<m){
-        if(onesub[i] >= twosub[0])
+        if(onesub[i] < twosub[j])
             stds[k++] = onesub[i++];
         else
             stds[k++] = twosub[j++];
@@ -22,9 +21,9 @@ void merge(vector<Student>& stds, int l, int mid, int r){
         stds[k++] = twosub[j];
 }
 
-void merge_gpa(vector<Student>& stds, int l, int mid, int r){
+template<typename T> void merge_gpa(vector<T>& stds, int l, int mid, int r){
     int n = mid - l + 1, m = r-mid;
-    Student onesub[n], twosub[m];
+    T onesub[n], twosub[m];
     for(int i=0; i<n; i++)
         onesub[i] = stds[i+ l];
     for(int i=0; i<m; i++)
@@ -32,7 +31,7 @@ void merge_gpa(vector<Student>& stds, int l, int mid, int r){
     int i=0, j=0, k=l;
 
     while(i<n and j<m){
-        if(onesub[i].get_gpa() >= twosub[0].get_gpa())
+        if(onesub[i].get_gpa() >= twosub[j].get_gpa())
             stds[k++] = onesub[i++];
         else
             stds[k++] = twosub[j++];
@@ -44,7 +43,7 @@ void merge_gpa(vector<Student>& stds, int l, int mid, int r){
 }
 
 
-void mergeSort(vector<Student>& stds, int l, int r, string type){
+template<typename T> void mergeSort(vector<T>& stds, int l, int r, string type){
     if(l < r){
         int mid = (l+r)/2;
         mergeSort(stds, mid+1, r, type);
